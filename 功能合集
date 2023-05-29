@@ -1,0 +1,61 @@
+#############
+# ctrl+/  一键注释
+# eval()   函数是转变量
+# random  返回一个随机数，是一个，for循环用range
+# -----------------------------------------------------------------------------------------------
+# adb devices 查看当前连接设备
+# adb devices -l  查询未连接的设备
+# 输入adb kill-server 关闭服务器
+# 输入adb start-server 重启服务器
+# adb -s 设备号 其他指令  举例adb -s devices install xxx.apk
+# adb connect 127.0.0.1:62001===ADB命令连接夜神模拟器的方法，62001为夜神的端口，1270.0.1为IP地址
+# ADB常用功能
+# adb shell input help   查看能用的命令
+# adb shell input
+#  text <string> (Default: touchscreen)                                            输入字符串功能
+#       keyevent [--longpress] <key code number or name> ... (Default: keyboard)   按键功能，后面带键位码 对应各种按键
+#       tap <x> <y> (Default: touchscreen)                                                                    点击功能   X,Y表示坐标
+#       swipe <x1> <y1> <x2> <y2> [duration(ms)] (Default: touchscreen)                拖动功能   表示从x1，y1拖动到x2，y2
+#       press (Default: trackball)                                                                                     按住功能
+#       roll <dx> <dy> (Default: trackball)                                                                    滚动球，现在手机一般没这功能
+# --------------一个根据amd命令返回值来判断ADB状态的方法，根据判断状态在执行对应操作-------------------------------
+# 主要语法1：os.system("adb devices")#cmd执行命令
+# 主要语法2： devices_cmd = os.popen(r"adb devices", "r")
+#     	   Device_Manager = devices_cmd.read()
+#     	   print(Device_Manager)#读取执行后返回内容
+# --------------- 知道了语法我们就可以使用语法发送对应的命令以及判断adb的状态--------------
+# devices_cmd = os.popen(r"get-state", "r")
+# Device_Manager = devices_cmd.read()
+# print(Device_Manager)#读取执行后返回内容
+#     if 'device' in Device_Manager:
+#  	print("[INFO] ADB is on")
+# elif: 'offline' in Device_Manager:
+# 	print("[WARNING] ADB device is dumb")
+# else:
+# 	print("[WARNING] ADB is abnormal: " + Device_Manager)
+'''----------一个从返回的字符里提取IP和端口的方法----------------------------------'''
+cmd_package={'连接夜神':"adb connect 127.0.0.1:62001",
+             '连接':'adb connect',
+              '查看':'adb devices',
+              '输入':'adb shell input text',
+              '按键':'adb shell input keyevent',
+              '点击':'adb shell input tap',
+              '终止服务器':'adb kill-server',
+              '启动服务器':'adb start-server',
+              '查看所有':'adb devices -l',
+               '获取包名':"adb shell am monitor"
+              # '':'',
+       }
+# nums = re.findall("\d+", str)
+# port = nums[4]
+# ips = [":".join([ip, port])]
+# print(ips)
+'''-----------------------------------------------------------------------'''
+"1，选择一个合适的开发环境，比如Python、Airtest、按键精灵等"
+"2，选择一个合适的游戏模拟器，比如BlueStacks、MuMu、雷电等"
+"3，分析游戏的逻辑和界面，确定需要实现的功能和流程"
+"4，编写代码，使用图像识别、文字识别、鼠标键盘控制等技术来实现自动化操作"
+"5，测试和调试代码，优化性能和稳定性"
+#你可以用Appium1这个库来实现寻找并绑定模拟器的功能，它可以让你用python来控制安卓模拟器或真机上的APP。
+# 你需要先安装Appium客户端和Appium Python客户端库，然后配置好Android SDK和环境变量，确保能够连接
+# 到模拟器或真机设备。然后你可以用Appium的API来获取模拟器的句柄，启动或关闭APP，模拟鼠标点击等操作。
